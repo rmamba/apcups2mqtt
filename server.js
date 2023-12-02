@@ -83,10 +83,12 @@ const run = async () => {
         mqttConfig.password = process.env.MQTT_PASS;
     }
 
+    console.log(`Connecting to MQTT server ${MQTT_SERVER}:${MQTT_PORT}`);
     mqttClient = mqtt.connect(`mqtt://${MQTT_SERVER}:${MQTT_PORT}`, mqttConfig);
 
     mqttClient.on('connect', () => {
-        console.log('mqtt connected...');
+        console.log('MQTT server connected...');
+        console.log(SETTINGS);
     });
     
     mqttClient.on('error', (err) => {
