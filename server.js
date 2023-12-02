@@ -13,7 +13,7 @@ const MQTT_PORT = process.env.MQTT_PORT || '1883';
 
 let mqttClient;
 
-const ProcessData = (chunk) => {
+const ProcessData = (SERVER, chunk) => {
     const data = {};
     if (chunk.length > 2) {
         const oldChunk = Buffer.concat([Buffer.from(' '), chunk]);
@@ -58,7 +58,7 @@ const ProcessServers = () => {
             client.write(Buffer.from([0x00, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73]));
         });
     
-        client.on('data', ProcessData);
+        client.on('data', chunk => ProcessData(SERVER, chunk));
     
         client.on('end', () => {
             if (DEBUG) {
