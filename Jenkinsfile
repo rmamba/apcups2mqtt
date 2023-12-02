@@ -31,7 +31,6 @@ pipeline {
         stage('Docker:latest') {
             steps {
                 sh "docker push rmamba/apcups2mqtt:latest"
-                sh "docker rmi rmamba/apcups2mqtt:latest"
             }
         }
         stage('Push to stage') {
@@ -50,6 +49,7 @@ pipeline {
                 sh "docker tag rmamba/apcups2mqtt:latest rmamba/apcups2mqtt:${params.gitLabel}"
                 sh "docker push rmamba/apcups2mqtt:${params.gitLabel}"
                 sh "docker rmi rmamba/apcups2mqtt:${params.gitLabel}"
+                sh "docker rmi rmamba/apcups2mqtt:latest"
             }
         }
         stage('Push to production') {
