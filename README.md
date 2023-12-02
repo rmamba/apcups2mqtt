@@ -1,6 +1,7 @@
-# apcups2mqtt
+# WHAT is apcups2mqtt?
 
-This container will read data from APC UPS daemon(s) and publish data to MQTT server
+This container will read data from APC UPS daemon(s) network server and publish data to MQTT server.
+For more information regarding setting up APCUPSD visit [APCUPSD Documentation](http://www.apcupsd.org/manual/manual.html)
 
 # MQTT Configuration
 
