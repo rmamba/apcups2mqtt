@@ -1,0 +1,13 @@
+{
+  "name": "eplass.webviewer.foxit",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "mqtt": "^5.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "status": "node read.js",
+    "start": "node server.js"
+  }
+}
