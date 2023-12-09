@@ -6,6 +6,7 @@ const extractValues = (process.env.EXTRACT_VALUES || 'LINEV|LOADPCT|BCHARGE|TIME
 const publishValues = (process.env.PUBLISH_VALUES || 'LINEV|LOADPCT|BCHARGE|TIMELEFT|BATTV|TONBATT|NOMINV|NOMBATTV|NOMPOWER').split('|');
 
 const DEBUG = (process.env.DEBUG || 'false') === 'true';
+const MQTT_CLIENT_ID = process.env.MQTT_CLIENT_ID || 'apcups2mqtt';
 // Read Base64 encoded data and parse it to json, default value is [{"id":1, "name":"UPS1","host":"127.0.0.1"}]
 const SETTINGS = JSON.parse(atob(process.env.SETTINGS || 'W3siaWQiOjEsICJuYW1lIjoiVVBTMSIsImhvc3QiOiIxMjcuMC4wLjEifV0='));
 const MQTT_SERVER = process.env.MQTT_SERVER || '127.0.0.1';
@@ -41,8 +42,6 @@ const ProcessData = (SERVER, chunk) => {
             mqttClient.publishAsync(`/UPS/${SERVER.id}/${v}`, data[`${v}_value`].toString());
         });
     }
-    
-    mqttClient.end();
 };
 
 const ProcessServers = () => {
@@ -72,8 +71,11 @@ const ProcessServers = () => {
 
 const run = async () => {
     const mqttConfig = {
+        clientId: MQTT_CLIENT_ID,
         rejectUnauthorized: false,
-        connectTimeout: 5000,
+        keepalive: 15,
+        connectTimeout: 1000,
+        reconnectPeriod: 500,
     };
 
     if (process.env.MQTT_USER) {
