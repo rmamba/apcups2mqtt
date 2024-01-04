@@ -12,6 +12,11 @@ const SETTINGS = JSON.parse(atob(process.env.SETTINGS || 'W3siaWQiOjEsICJuYW1lIj
 const MQTT_SERVER = process.env.MQTT_SERVER || '127.0.0.1';
 const MQTT_PORT = process.env.MQTT_PORT || '1883';
 
+let UPDATE_INTERVAL = parseInt(process.env.UPDATE_INTERVAL || '5000');
+if (UPDATE_INTERVAL < 250) {
+    UPDATE_INTERVAL = 250;
+}
+
 let mqttClient;
 
 const ProcessData = (SERVER, chunk) => {
@@ -102,7 +107,7 @@ const run = async () => {
         await sleep(1000);
     }
     
-    setInterval(ProcessServers, 5000);
+    setInterval(ProcessServers, UPDATE_INTERVAL);
 }
 
 run();
