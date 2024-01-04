@@ -2,8 +2,8 @@ const Net = require('net');
 const mqtt = require('mqtt');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-const extractValues = (process.env.EXTRACT_VALUES || 'LINEV|LOADPCT|BCHARGE|TIMELEFT|MBATTCHG|MINTIMEL|MAXTIME|LOTRANS|HITRANS|ALARMDEL|BATTV|TONBATT|CUMONBATT|NOMINV|NOMBATTV|NOMPOWER').split('|');
-const publishValues = (process.env.PUBLISH_VALUES || 'LINEV|LOADPCT|BCHARGE|TIMELEFT|BATTV|TONBATT|NOMINV|NOMBATTV|NOMPOWER').split('|');
+const extractValues = (process.env.EXTRACT_VALUES || 'STATUS|LINEV|LOADPCT|BCHARGE|TIMELEFT|MBATTCHG|MINTIMEL|MAXTIME|LOTRANS|HITRANS|ALARMDEL|BATTV|TONBATT|CUMONBATT|NOMINV|NOMBATTV|NOMPOWER').split('|');
+const publishValues = (process.env.PUBLISH_VALUES || 'STATUS|LINEV|LOADPCT|BCHARGE|TIMELEFT|BATTV|TONBATT|NOMINV|NOMBATTV|NOMPOWER').split('|');
 
 const DEBUG = (process.env.DEBUG || 'false') === 'true';
 const MQTT_CLIENT_ID = process.env.MQTT_CLIENT_ID || 'apcups2mqtt';
