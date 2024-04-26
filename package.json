@@ -1,6 +1,7 @@
 {
-  "name": "eplass.webviewer.foxit",
+  "name": "apcups2mqtt",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "mqtt": "^5.3.1"
